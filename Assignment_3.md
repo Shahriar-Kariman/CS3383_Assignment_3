@@ -235,3 +235,58 @@ $$
 $$
 
 The algorithm is $\Theta(f(n)) = \Theta(n)$.
+
+## Question 6 - Highest Safe Rung
+
+I could start from the bottom and keep dropping the jar from a rung $m$ rungs higher than the prvious one and then do a linear search btween the point where the first jar broke and last successful drop.
+
+In the worst case senario the running time would be
+
+$$
+\begin{split}
+  T(n) = \frac{n}{m}+m = o(n)
+  \\
+  T(n) = \frac{n}{m}+m < n
+\end{split}
+$$
+
+Since I know that the binary search method yeilds the fastest result and is $\log{n}$ then the new solution can't be as fast as that but we know $\log{n} < \sqrt{n} < n$ so we need a rlationship btween $m$ and $n$ such that $T(n) = \sqrt{n}$.
+
+$$
+\begin{split}
+  \frac{n}{m}+m = c \times \sqrt{n}, \ for\ a\ big\ enough\ n
+  \\
+  \frac{\sqrt{n}}{m} + \frac{m}{\sqrt{n}} = c
+  \\
+  \frac{n + m^2}{m \times \sqrt{n}} = c
+  \\
+  n + m^2 = c \times m \times \sqrt{n}
+  \\
+  n - c \times m \times n + m^2 = 0
+  \\
+  (\sqrt{n}-m)^2 =  0
+  \\
+  \sqrt{n}-m = 0
+  \\
+  m = \sqrt{n}
+\end{split}
+$$
+
+Now that we know what $m$ needs to be here is the algorithm:
+
+```py
+def highestSafeRung():
+  rung = 0
+  while rung<n:
+    if drop(rung)==broken:
+      break # get out of the loop if the jar broke
+    rung += math.sqrt(n)
+  for i in range(rung-math.sqrt(n),rung):
+    if drop(rung)==broken:
+      return i-1
+```
+
+Now if I wanted to use $k$ jars instead of $2$ I could make the algorithm faster by further segmenting the rungs here is the algorithm:
+
+```py
+```
