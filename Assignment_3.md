@@ -84,7 +84,7 @@ $$
 \end{split}
 $$
 
-Acorrding to case 2 of the master theorem since:
+According to case 2 of the master theorem since:
 
 $$
 \begin{split}
@@ -114,7 +114,7 @@ def stillpoint(A, low, high):
 
 ### Run Time Analysis
 
-Lets say say $(high-low) = n$ in that case here is the recurence equation:
+Lets say say $(high-low) = n$ in that case here is the recurrence equation:
 
 $$
 \begin{split}
@@ -169,7 +169,7 @@ Since we check each index only once by using variables `index_a` and `index_b` u
 
 ## Question 5 - Median Value of an Unsorted Array
 
-I am going to be honest I struggled with this question for a bit but I finally figured out that maybe expecteed running time is the same as average running time and that made me think about quick sort which is not fair cause we didn't even go over quicksort in class and I had completely forgotten about it up to this point as a matter of fact I distinctly recall the professor mentioning that he was not going to give us questions about quicksort.
+I am going to be honest I struggled with this question for a bit but I finally figured out that maybe expected running time is the same as average running time and that made me think about quick sort which is not fair cause we didn't even go over quicksort in class and I had completely forgotten about it up to this point as a matter of fact I distinctly recall the professor mentioning that he was not going to give us questions about quicksort.
 
 ```py
 def modifiedQuickSort(A, start, end):
@@ -198,7 +198,7 @@ def findMedian(array):
   return A[len(A)/2]
 ```
 
-I can use master theorem to calculate the avrage time complexity of the algorithm. Since on avrage each recursive call cuts the problem in half I could say the recurrence equation of this algorithm is:
+I can use master theorem to calculate the average time complexity of the algorithm. Since on average each recursive call cuts the problem in half I could say the recurrence equation of this algorithm is:
 
 $$
 \begin{split}
@@ -221,7 +221,7 @@ $$
 \end{split}
 $$
 
-Acorrding to the case 3 of the master theorem since:
+According to the case 3 of the master theorem since:
 
 $$
 \begin{split}
@@ -238,9 +238,9 @@ The algorithm is $\Theta(f(n)) = \Theta(n)$.
 
 ## Question 6 - Highest Safe Rung
 
-I could start from the bottom and keep dropping the jar from a rung $m$ rungs higher than the prvious one and then do a linear search btween the point where the first jar broke and last successful drop.
+I could start from the bottom and keep dropping the jar from a rung $m$ rungs higher than the previous one and then do a linear search between the point where the first jar broke and last successful drop.
 
-In the worst case senario the running time would be
+In the worst case scenario the running time would be
 
 $$
 \begin{split}
@@ -250,7 +250,7 @@ $$
 \end{split}
 $$
 
-Since I know that the binary search method yeilds the fastest result and is $\log{n}$ then the new solution can't be as fast as that but we know $\log{n} < \sqrt{n} < n$ so we need a rlationship btween $m$ and $n$ such that $T(n) = \sqrt{n}$.
+Since I know that the binary search method yields the fastest result and is $\log{n}$ then the new solution can't be as fast as that but we know $\log{n} < \sqrt{n} < n$ so we need a relationship between $m$ and $n$ such that $T(n) = \sqrt{n}$.
 
 $$
 \begin{split}
@@ -288,9 +288,9 @@ def highestSafeRung():
 
 ### General Case for $k$ jars
 
-Now if I wanted to use $k$ jars instead of $2$ I could make the algorithm faster by further segmenting the ladder. I figured the algorithm should be faster than the one in part A but not as fast as binary search tree so I am thinking if I could segment the rungs so that algoithm is in the order of $n^{\frac{1}{k}}$ it would satisfy that condition meaning ( $\log{n} < n^{\frac{1}{k}} < \sqrt{n}$ ).
+Now if I wanted to use $k$ jars instead of $2$ I could make the algorithm faster by further segmenting the ladder. I figured the algorithm should be faster than the one in part A but not as fast as binary search tree so I am thinking if I could segment the rungs so that algorithm is in the order of $n^{\frac{1}{k}}$ it would satisfy that condition meaning ( $\log{n} < n^{\frac{1}{k}} < \sqrt{n}$ ).
 
-I can try to do a similar calcuation for a new $m$.
+I can try to do a similar calculation for a new $m$.
 
 $$
 \begin{split}
@@ -327,4 +327,4 @@ def highestSafeRung(k):
       return i-1
 ```
 
-Now with this algorithm in the worst case senario we use k jars and teh run time analysis is $\Theta(n^{\frac{1}{k}})$.
+Now with this algorithm in the worst case scenario we use k jars and the run time analysis is $\Theta(n^{\frac{1}{k}})$.
