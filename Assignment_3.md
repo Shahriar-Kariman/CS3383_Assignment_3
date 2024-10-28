@@ -104,7 +104,7 @@ My algorithm returns $-1$ for the when there are no indexes that $a_i = i$ cause
 def stillpoint(A, low, high):
   if low > high:
     return -1
-  mid = (low + high)/2
+  mid = (low + high)//2
   if A[mid] == mid:
     return mid
   if A[mid] > mid:
@@ -135,7 +135,7 @@ So the question is asking for only one peak I could just look at a random elemen
 
 ```py
 def findPeak(arr, low, high):
-  mid = (low + high)/2
+  mid = (low + high)//2
   if (mid == 0 or arr[mid-1] <= arr[mid]) and (mid == (len(arr)-1) or arr[mid]>=arr[mid+1]):
     return mid
   elif mid > 0 and arr[mid-1] > arr[mid]:
@@ -262,7 +262,7 @@ $$
   \\
   n + m^2 = c \times m \times \sqrt{n}
   \\
-  n - c \times m \times n + m^2 = 0
+  n - c \times m \times \sqrt{n} + m^2 = 0
   \\
   (\sqrt{n}-m)^2 =  0
   \\
@@ -286,7 +286,45 @@ def highestSafeRung():
       return i-1
 ```
 
-Now if I wanted to use $k$ jars instead of $2$ I could make the algorithm faster by further segmenting the rungs here is the algorithm:
+### General Case for $k$ jars
+
+Now if I wanted to use $k$ jars instead of $2$ I could make the algorithm faster by further segmenting the ladder. I figured the algorithm should be faster than the one in part A but not as fast as binary search tree so I am thinking if I could segment the rungs so that algoithm is in the order of $n^{\frac{1}{k}}$ it would satisfy that condition meaning ( $\log{n} < n^{\frac{1}{k}} < \sqrt{n}$ ).
+
+I can try to do a similar calcuation for a new $m$.
+
+$$
+\begin{split}
+  \frac{n}{m}+m = c \times n^{\frac{1}{k}}, \ for\ a\ big\ enough\ n
+  \\
+  \frac{n^{\frac{1}{k}}}{m} + \frac{m}{n^{\frac{1}{k}}} = c
+  \\
+  \frac{n^{\frac{2}{k}} + m^2}{m \times n^{\frac{1}{k}}} = c
+  \\
+  n^{\frac{2}{k}} + m^2 = c \times m \times n^{\frac{1}{k}}
+  \\
+  n^{\frac{2}{k}} - c \times m \times n^{\frac{1}{k}} + m^2 = 0
+  \\
+  (n^{\frac{1}{k}}-m)^2 =  0
+  \\
+  n^{\frac{1}{k}}-m = 0
+  \\
+  m = n^{\frac{1}{k}}
+\end{split}
+$$
+
+So I can just do the same algorithm but increment the rung by $n^{\frac{1}{k}}$ instead of $\sqrt{n}$.
 
 ```py
+def highestSafeRung(k):
+  rung = 0
+  increment = n ** (1/k)
+  while rung<n:
+    if drop(rung)==broken:
+      break # get out of the loop if the jar broke
+    rung += increment
+  for i in range(rung-increment,rung):
+    if drop(rung)==broken:
+      return i-1
 ```
+
+Now with this algorithm in the worst case senario we use k jars and teh run time analysis is $\Theta(n^{\frac{1}{k}})$.
